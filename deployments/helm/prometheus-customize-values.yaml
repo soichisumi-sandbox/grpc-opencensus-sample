@@ -1,0 +1,19 @@
+alertmanager:
+  ingress:
+    enabled: false
+server:
+  ingress:
+    enabled: true
+    hosts:
+      - prometheus.minikube
+  persistentVolume:
+    size: 1Gi
+    storageClass: "standard"
+  retention: "12h"
+pushgateway:
+  enabled: false
+nodeExporter:
+  image:
+    repository: prom/node-exporter
+    tag: v0.17.0
+    pullPolicy: IfNotPresent

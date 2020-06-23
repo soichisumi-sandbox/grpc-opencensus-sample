@@ -1,0 +1,8 @@
+proto_outdir = "./proto/ext"
+
+[[dependencies]]
+  target = "github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis"
+  revision = "52a539ec166cf7380660e9c7ebde5206169d385d"
+  branch = "master"
+  path = ""
+  ignores = ["google/rpc"]

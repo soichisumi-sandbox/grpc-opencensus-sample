@@ -1,0 +1,15 @@
+FROM golang:1.12
+LABEL Maintainer="Soichi Sumi <soichi.sumi@gmail.com>"
+
+ENV GO111MODULE on
+
+ADD . /go/src/github.com/soichisumi-sandbox/grpc-opencensus-sample/
+WORKDIR /go/src/github.com/soichisumi-sandbox/grpc-opencensus-sample/
+
+RUN make go-build
+
+EXPOSE 3000
+
+WORKDIR /go/src/github.com/soichisumi-sandbox/grpc-opencensus-sample/cmd/api
+
+ENTRYPOINT ["./api"]

@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: grpc-opencensus-sample
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: grpc-opencensus-sample
+    spec:
+      containers:
+        - name: grpc-opencensus-sample-api
+          image: soichisumi0/grpc-opencensus-sample-api:v1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: grpc
+              containerPort: 3000
+        - name: grpc-opencensus-sample-gw
+          image: soichisumi0/grpc-opencensus-sample-gw:v1.0
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 8080
+            initialDelaySeconds: 3

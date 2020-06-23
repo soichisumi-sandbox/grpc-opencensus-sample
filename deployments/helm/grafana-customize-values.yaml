@@ -1,0 +1,10 @@
+ingress:
+  enabled: true
+  hosts:
+    - grafana.minikube
+persistence:
+  enabled: true
+  storageClassName: "standard"
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi

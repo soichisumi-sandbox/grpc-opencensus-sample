@@ -1,0 +1,69 @@
+syntax = "proto3";
+package proto;
+
+// End Point
+//service Server{
+//    rpc GetData (GetDataRequest) returns (GetDataResponse) {}
+//    rpc SetData (SetDataRequest) returns (SetDataResponse) {}
+//    rpc GetAllData (GetAllDataRequest) returns (GetAllDataResponse) {}
+//    rpc DeleteData (DeleteDataRequest) returns (DeleteDataResponse) {}
+//}
+
+// grpc-gateway
+import "google/api/annotations.proto";
+
+
+service Server {
+    rpc GetData (GetDataRequest) returns (GetDataResponse) {
+        option (google.api.http) = {
+            get: "/kvstore/{key}"
+        };
+    }
+    rpc SetData (SetDataRequest) returns (SetDataResponse) {
+        option (google.api.http) = {
+            post: "/kvstore/{key}"
+            body: "*"
+        };
+    }
+    rpc GetAllData (GetAllDataRequest) returns (GetAllDataResponse) {
+        option (google.api.http) = {
+            get: "/kvstore"
+        };
+    }
+    rpc DeleteData (DeleteDataRequest) returns (DeleteDataResponse) {
+        option (google.api.http) = {
+            delete: "/kvstore/{key}"
+        };
+    }
+}
+
+message GetDataRequest {
+    string key = 1;
+}
+message GetDataResponse{
+    string value = 1;
+}
+
+message SetDataRequest {
+    string key = 1;
+    string value = 2;
+}
+message SetDataResponse {
+}
+
+message Pair {
+    string key = 1;
+    string value = 2;
+}
+
+message GetAllDataRequest {
+}
+message GetAllDataResponse {
+    repeated Pair result = 1;
+}
+
+message DeleteDataRequest {
+    string key = 1;
+}
+message DeleteDataResponse {
+}
